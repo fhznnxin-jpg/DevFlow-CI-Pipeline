@@ -1,0 +1,22 @@
+name: DevFlow CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Verify HTML Project
+        run: |
+          test -f mn.html
+          grep -q "<html" mn.html
+          grep -q "</html>" mn.html
+          echo "HTML project verification successful!"
